@@ -2,6 +2,7 @@ import cloudinary from "../Lib/cloudinary.js";
 import Message from "../Models/message.js";
 import Messages from "../Models/message.js";
 import User from "../Models/user.js";
+import { getRecieverSocketId, io } from "../Lib/socket.js";
 
 const getUserSidebar = async (req, res) => {
     try {
@@ -70,11 +71,14 @@ const sendMessages = async (req, res) => {
         });
 
         await newMessage.save();
-        console.log("Message saved successfully. Full message:", JSON.stringify(newMessage, null, 2));
+
+        const recieverSocketId = getRecieverSocketId(recieverId);
+        if (recieverSocketId) {
+            io.to(recieverSocketId).emit("newMessage", newMessage);
+        }
 
         res.status(200).json(newMessage);
     } catch (error) {
-        console.error("Error in sendMessages:", error);
         res.status(500).json({ 
             message: error.message || "Failed to send message",
             error: error.toString()
