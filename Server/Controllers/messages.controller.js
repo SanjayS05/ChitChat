@@ -17,7 +17,7 @@ const getUserSidebar = async (req, res) => {
 
 const getMessages = async (req, res) => {
     try {
-        const friendId = req.params;        
+        const friendId = req.params.id;        
         const userId = req.user._id;
         
         const messages = await Messages.find({
@@ -36,7 +36,7 @@ const getMessages = async (req, res) => {
 
 const sendMessages = async (req, res) => {
     try {
-        const recieverId = req.params;
+        const recieverId = req.params.id;
         const { text, image } = req.body;
         const senderId = req.user._id;
 
