@@ -42,8 +42,24 @@ const sendMessages = async (req, res) => {
 
         let imageUrl;
         if (image) {
-            const uploadResponse = await cloudinary.uploader.upload(image);
-            imageUrl = uploadResponse.secure_url;
+            console.log("Image data received, length:", image.length);
+            
+            if (!image.startsWith('data:image/')) {
+                throw new Error('Invalid image format. Must be a valid base64 image.');
+            }
+
+            try {
+                console.log("Attempting to upload image to Cloudinary...");
+                const uploadResponse = await cloudinary.uploader.upload(image, {
+                    resource_type: "auto",
+                    folder: "chat_app"
+                });
+                console.log("Upload successful, URL:", uploadResponse.secure_url);
+                imageUrl = uploadResponse.secure_url;
+            } catch (cloudinaryError) {
+                console.error("Cloudinary upload error:", cloudinaryError);
+                throw new Error(`Failed to upload image: ${cloudinaryError.message}`);
+            }
         }
 
         const newMessage = new Message({
@@ -54,13 +70,15 @@ const sendMessages = async (req, res) => {
         });
 
         await newMessage.save();
-
-        //realtime functionality using socket.io
+        console.log("Message saved successfully. Full message:", JSON.stringify(newMessage, null, 2));
 
         res.status(200).json(newMessage);
     } catch (error) {
-        console.log(error.message);
-        res.status(500).json({ message: error.message });
+        console.error("Error in sendMessages:", error);
+        res.status(500).json({ 
+            message: error.message || "Failed to send message",
+            error: error.toString()
+        });
     }
 }
 
