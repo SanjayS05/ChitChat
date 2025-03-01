@@ -3,7 +3,7 @@ import { axiosInstance } from '../Lib/axios.js'
 import toast from "react-hot-toast";
 import { io } from "socket.io-client";
 
-const BASE_URL = "https://chitchat-server-six.vercel.app/"
+const BASE_URL = "http://localhost:3000"
 export const useAuthStore = create((set, get) => ({
     authUser: null,
     isSigningUp: false,
