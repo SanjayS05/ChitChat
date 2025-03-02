@@ -1,0 +1,22 @@
+{
+  "name": "chitchat",
+  "version": "1.0.0",
+  "description": "A modern real-time chat application built with React, Node.js, Socket.IO, and Express.",
+  "main": "index.js",
+  "scripts": {
+    "build":"npm install --prefix Server && npm install --prefix Client && npm run build --prefix Client",
+    "start": "npm run start --prefix Server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SanjayS05/ChitChat.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/SanjayS05/ChitChat/issues"
+  },
+  "homepage": "https://github.com/SanjayS05/ChitChat#readme"
+}
