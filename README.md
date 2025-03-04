@@ -44,32 +44,6 @@ A modern real-time chat application built with React, Node.js, Socket.IO, and Ex
 - Message storage and retrieval
 - Online user tracking
 
-## Getting Started
-
-1. Clone the repository
-2. Install dependencies:
-   ```bash
-   # Install frontend dependencies
-   cd Client
-   npm install
-
-   # Install backend dependencies
-   cd Server
-   npm install
-   ```
-3. Set up environment variables:
-   - Create `.env` file in Server directory
-   - Add required environment variables (PORT, MONGODB_URI, etc.)
-
-4. Start the development servers:
-   ```bash
-   # Start frontend (from Client directory)
-   npm run dev
-
-   # Start backend (from Server directory)
-   npm start
-   ```
-
 ## Features in Detail
 
 ### Real-time Communication
