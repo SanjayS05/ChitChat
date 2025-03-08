@@ -7,8 +7,6 @@ import SignUpPage from "./Pages/SignUpPage";
 import LoginPage from "./Pages/LoginPage";
 import SettingsPage from "./Pages/SettingsPage";
 import ProfilePage from "./Pages/ProfilePage";
-// import { index } from "./Constants/index.js";
-// import { axiosInstance } from "./Lib/axios";
 import { useAuthStore } from "./Store/useAuthStore";
 import { useEffect } from "react";
 import { Loader } from "lucide-react"

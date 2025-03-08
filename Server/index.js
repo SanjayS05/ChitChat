@@ -8,28 +8,18 @@ import dotenv from "dotenv";
 dotenv.config();
 import connectDB from "./Lib/db.js";
 
-import path from "path";
-
 const PORT = process.env.PORT || 5000;
-const __dirname = path.resolve();
-
 
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: ["http://localhost:5173","https://chitchat-client-cs6j.onrender.com/"],
     credentials: true,
 }))
 
 app.use('/api/auth', authRoutes);
 app.use('/api/message', messageRoutes);
 
-if (process.env.NODE_ENV === "production") {
-    app.use(express.static(path.join(__dirname, "/Client/dist")));
-    app.get("*", (req, res) => {
-        res.sendFile(path.join(__dirname, "../Client", "dist", "index.html"));
-    });
-}
 
 server.listen(PORT, () => {
     console.log("Server is running on port " + PORT);
