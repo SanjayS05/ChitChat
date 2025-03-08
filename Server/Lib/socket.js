@@ -8,7 +8,7 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
     cors: {
-        origin: ["http://localhost:5173", "https://chitchat-client-cs6j.onrender.com"],
+        origin: ["http://localhost:5173", "https://chitchat-client-cs6j.onrender.com", "https://chitchat-u82w.onrender.com"],
         credentials: true
     }
 });
