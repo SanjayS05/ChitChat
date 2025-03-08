@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 5000;
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
-    origin: ["http://localhost:5173","https://chitchat-client-cs6j.onrender.com/"],
+    origin: ["http://localhost:5173", "https://chitchat-client-cs6j.onrender.com"],
     credentials: true,
 }))
 
