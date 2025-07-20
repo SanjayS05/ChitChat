@@ -12,6 +12,7 @@ import {
 import { Link } from "react-router-dom";
 import AuthImagePattern from "../Components/AuthImagePattern";
 import toast from "react-hot-toast";
+import PasswordValidation from "../Components/PasswordValidation";
 
 const SignUpPage = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -31,8 +32,11 @@ const SignUpPage = () => {
     const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (!emailRegex.test(formData.email))
       return toast.error("Invalid email address");
-    if (formData.password.length < 6)
-      return toast.error("Password must be atleast 6 characters");
+
+    const passwordRegex =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    if (!passwordRegex.test(formData.password))
+      return toast.error("Password does not meet requirements");
 
     return true;
   };
@@ -88,9 +92,7 @@ const SignUpPage = () => {
                 />
               </div>
             </div>
-          </form>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
             <div className="form-control">
               <label className="label">
                 <span className="label-text font-medium">Email</span>
@@ -110,9 +112,7 @@ const SignUpPage = () => {
                 />
               </div>
             </div>
-          </form>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
             <div className="form-control">
               <label className="label">
                 <span className="label-text font-medium">Password</span>
@@ -144,7 +144,9 @@ const SignUpPage = () => {
                   )}
                 </button>
               </div>
+              <PasswordValidation password={formData.password} />
             </div>
+
             <button
               type="submit"
               className="btn btn-primary w-full"
@@ -160,6 +162,7 @@ const SignUpPage = () => {
               )}
             </button>
           </form>
+
           <div className="text-center">
             <p className="text-base-content/60">
               Already have an account?{" "}
